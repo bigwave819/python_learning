@@ -1,0 +1,6 @@
+//used on localhost
+uvicorn main:app --reload
+
+
+//used in production
+uvicorn main:app --host 0.0.0.0 --port 8000
