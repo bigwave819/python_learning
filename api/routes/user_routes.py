@@ -1,0 +1,18 @@
+from fastapi import APIRouter, HTTPException
+from app.schemas.user_schema import UserCreate, UserLogin
+from app.services.user_service import register_user, login_user
+
+router = APIRouter()
+
+@router.post("/register")
+async def register(user: UserCreate):
+    user_id = await register_user(user)
+    return {"message": "User created", "user_id": user_id}
+
+@router.post("/login")
+async def login(user: UserLogin):
+    token = await login_user(user)
+    if not token:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    return {"access_token": token}
