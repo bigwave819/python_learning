@@ -1,7 +1,7 @@
 from bson import ObjectId
-from app.config.database import user_collection
-from app.utils.hash import hash_password, verify_password
-from app.utils.jwt import create_token
+from config.database import user_collection
+from utils.hash import hash_password, verify_password
+from utils.jwt import create_token
 
 async def register_user(user):
     user_dict = user.dict()

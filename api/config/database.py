@@ -6,3 +6,4 @@ client = AsyncIOMotorClient(MongoDbUrl)
 database = client["fast_crud"]
 
 user_collection = database["none"]
+product_collection = database["products"]

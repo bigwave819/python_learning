@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException
-from app.schemas.user_schema import UserCreate, UserLogin
-from app.services.user_service import register_user, login_user
+from fastapi import APIRouter, HTTPException, Depends
+from schemas.user_schema import UserCreate, UserLogin
+from services.user_service import register_user, login_user
+from utils.dependecies import get_current_user
 
 router = APIRouter()
 
@@ -16,3 +17,8 @@ async def login(user: UserLogin):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     return {"access_token": token}
+
+
+@router.get("/profile")
+async def profile(user=Depends(get_current_user)):
+    return {"user": user}
